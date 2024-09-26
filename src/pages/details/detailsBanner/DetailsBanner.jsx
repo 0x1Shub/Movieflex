@@ -43,7 +43,7 @@ const DetailsBanner = ({ video, crew }) => {
           {!!data && (
             <React.Fragment>
               <div className="backdrop-img">
-                <Img src={url.backdrop + data?.backdrop_path} />
+                <Img src={url.backdrop + data.backdrop_path} />
               </div>
               <div className="opacity-layer"></div>
               <ContentWrapper>
@@ -51,24 +51,29 @@ const DetailsBanner = ({ video, crew }) => {
                   <div className="left">
                     {data.poster_path ? (
                       <Img
-                        className={"posterImg"}
+                        className="posterImg"
                         src={url.backdrop + data.poster_path}
                       />
                     ) : (
-                      <Img className={"posterImg"} src={PosterFallback} />
+                      <Img className="posterImg" src={PosterFallback} />
                     )}
                   </div>
                   <div className="right">
-                    <div className="title">{`${
-                      data.name || data.title
-                    } (${dayjs(data?.release_date).format("YYYY")})`}</div>
-
+                    <div className="title">
+                      {`${data.name || data.title} (${dayjs(
+                        data?.release_date
+                      ).format("YYYY")})`}
+                    </div>
                     <div className="subtitle">{data.tagline}</div>
 
                     <Genres data={_genres} />
 
                     <div className="row">
-                      <CircleRating rating={data.vote_average.toFixed(1)} />
+                      {data.vote_average ? (
+                        <CircleRating rating={data.vote_average.toFixed(1)} />
+                      ) : (
+                        <div>No Rating Available</div>
+                      )}
                       <div
                         className="playbtn"
                         onClick={() => {
