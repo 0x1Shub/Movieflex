@@ -77,8 +77,10 @@ const DetailsBanner = ({ video, crew }) => {
                       <div
                         className="playbtn"
                         onClick={() => {
-                          setShow(true);
-                          setVideoId(video.key);
+                          if (video && video.key) {
+                            setShow(true);
+                            setVideoId(video.key);
+                          }
                         }}
                       >
                         <PlayIcon />
